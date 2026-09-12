@@ -3,120 +3,105 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Accessible multi-page audit dashboard demonstrating semantic HTML5, keyboard navigation, forms, tables, and dialogs.">
-  <title>Accessibility Audit Dashboard</title>
+  <meta name="description" content="Accessible capstone catalog with simulated authentication, REST data, CRUD operations, search, filtering, sorting, and persistent state.">
+  <title>A11y Store — Capstone</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Accessibility Audit Dashboard home">A11y Audit</a>
+      <a class="brand" href="index.html">A11y Store</a>
       <nav aria-label="Primary navigation">
         <ul class="nav-list">
-          <li><a href="index.html" aria-current="page">Dashboard</a></li>
+          <li><a href="index.html" aria-current="page">Catalog</a></li>
           <li><a href="pages/data.html">Audit data</a></li>
           <li><a href="pages/forms.html">Forms</a></li>
         </ul>
       </nav>
+      <div class="header-actions">
+        <span id="auth-status" role="status">Guest</span>
+        <button class="button secondary" id="auth-button" type="button">Sign in</button>
+        <span aria-label="Cart items">Cart: <strong id="cart-count">0</strong></span>
+      </div>
     </div>
   </header>
 
   <div class="layout container">
-    <aside class="sidebar" aria-label="Sidebar navigation">
-      <h2>Sections</h2>
-      <nav aria-label="Dashboard sections">
-        <ul>
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#findings">Findings</a></li>
-          <li><a href="#actions">Actions</a></li>
-        </ul>
-      </nav>
+    <aside class="sidebar" aria-label="Catalog tools">
+      <h2>Catalog</h2>
+      <p>Browse products loaded from a public REST API.</p>
+      <label for="sort-products">Sort products</label>
+      <select id="sort-products">
+        <option value="default">Recommended</option>
+        <option value="price-asc">Price: low to high</option>
+        <option value="price-desc">Price: high to low</option>
+        <option value="name">Name A–Z</option>
+      </select>
+      <button class="button" id="open-create" type="button">Add product</button>
     </aside>
 
     <main id="main-content" tabindex="-1">
-      <section id="overview" aria-labelledby="overview-title">
+      <section aria-labelledby="catalog-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Accessible interface example</p>
-            <h1 id="overview-title">Accessibility Audit Dashboard</h1>
-            <p>Semantic structure, visible focus, keyboard-friendly controls, and clear data presentation.</p>
+            <p class="eyebrow">Full capstone vertical slice</p>
+            <h1 id="catalog-title">Interactive Product Catalog</h1>
+            <p>Search, filter, sort, add, edit, delete, sign in, and keep cart state across refreshes.</p>
           </div>
-          <button class="button" type="button" data-open-dialog="audit-dialog">View audit details</button>
         </div>
 
-        <div class="cards" aria-label="Audit summary">
-          <article class="card">
-            <h2>Accessibility score</h2>
-            <p class="metric">96%</p>
-            <p>Strong baseline with a few items to review.</p>
-          </article>
-          <article class="card">
-            <h2>Findings</h2>
-            <p class="metric">4</p>
-            <p>Two medium and two low-priority findings.</p>
-          </article>
-          <article class="card">
-            <h2>Last audit</h2>
-            <p class="metric">12 Sep 2026</p>
-            <p>Keyboard and markup checks documented.</p>
-          </article>
+        <div id="error-banner" class="error-banner" role="alert" hidden>
+          <span id="error-message">Something went wrong.</span>
+          <button class="button secondary" id="retry-products" type="button">Retry</button>
         </div>
-      </section>
 
-      <section id="findings" aria-labelledby="findings-title">
-        <h2 id="findings-title">Recent findings</h2>
-        <div class="table-wrapper">
-          <table>
-            <caption>Accessibility findings and remediation priority</caption>
-            <thead>
-              <tr>
-                <th scope="col">Finding</th>
-                <th scope="col">Area</th>
-                <th scope="col">Priority</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><th scope="row">Focus visibility</th><td>Navigation</td><td>Medium</td><td>Review</td></tr>
-              <tr><th scope="row">Form instructions</th><td>Forms</td><td>Medium</td><td>Open</td></tr>
-              <tr><th scope="row">Table caption</th><td>Data</td><td>Low</td><td>Resolved</td></tr>
-              <tr><th scope="row">Dialog labeling</th><td>Components</td><td>Low</td><td>Resolved</td></tr>
-            </tbody>
-          </table>
+        <div class="panel catalog-toolbar">
+          <label for="product-search">Search products</label>
+          <input id="product-search" type="search" placeholder="Search by product name or description" autocomplete="off">
+          <div id="category-tabs" class="button-row" role="group" aria-label="Product categories"></div>
         </div>
-      </section>
 
-      <section id="actions" aria-labelledby="actions-title">
-        <h2 id="actions-title">Next actions</h2>
-        <article class="panel">
-          <h3>Complete the manual keyboard pass</h3>
-          <p>Use Tab and Shift+Tab to verify focus order, visible focus, activation, and the absence of keyboard traps.</p>
-          <a class="button secondary" href="pages/forms.html">Open accessible form example</a>
-        </article>
+        <div id="loading-skeleton" class="cards" aria-live="polite" aria-label="Loading products" hidden>
+          <article class="card skeleton"><div></div><div></div><div></div></article>
+          <article class="card skeleton"><div></div><div></div><div></div></article>
+          <article class="card skeleton"><div></div><div></div><div></div></article>
+        </div>
+        <div id="product-grid" class="cards" aria-live="polite" aria-busy="false"></div>
       </section>
     </main>
   </div>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>Accessibility + Architecture Audit Project · Built with semantic HTML5.</p>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="container"><p>A11y Store Capstone · Accessible HTML · REST API · Persistent client state</p></div></footer>
 
-  <dialog id="audit-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
-    <div class="dialog-content">
-      <h2 id="dialog-title">Audit details</h2>
-      <p id="dialog-description">This example demonstrates a native modal dialog with an accessible name, description, and keyboard-operable controls.</p>
-      <ul>
-        <li>Semantic landmarks are used throughout the page.</li>
-        <li>Interactive elements are reachable with the keyboard.</li>
-        <li>Form and table examples are available on separate pages.</li>
-      </ul>
-      <button class="button" type="button" data-close-dialog>Close dialog</button>
-    </div>
+  <dialog id="auth-dialog" aria-labelledby="auth-title">
+    <form method="dialog" id="auth-form" class="dialog-content">
+      <h2 id="auth-title">Simulated authentication</h2>
+      <p>Demo-only authentication. No password is sent to a server.</p>
+      <label for="auth-email">Email</label>
+      <input id="auth-email" name="email" type="email" required autocomplete="email" placeholder="student@example.com">
+      <label for="auth-password">Password</label>
+      <input id="auth-password" name="password" type="password" required minlength="4" autocomplete="current-password" placeholder="••••">
+      <div class="button-row"><button class="button" value="submit" type="submit">Sign in</button><button class="button secondary" value="cancel" type="submit">Cancel</button></div>
+    </form>
   </dialog>
 
-  <script src="app.js" defer></script>
+  <dialog id="product-dialog" aria-labelledby="product-dialog-title">
+    <form method="dialog" id="product-form" class="dialog-content">
+      <h2 id="product-dialog-title">Add product</h2>
+      <input type="hidden" id="product-id">
+      <label for="product-title">Product name</label>
+      <input id="product-title" required maxlength="100">
+      <label for="product-category">Category</label>
+      <input id="product-category" required maxlength="50" placeholder="electronics">
+      <label for="product-price">Price</label>
+      <input id="product-price" type="number" min="0" step="0.01" required>
+      <label for="product-description">Description</label>
+      <textarea id="product-description" rows="4" required maxlength="500"></textarea>
+      <div class="button-row"><button class="button" type="submit">Save product</button><button class="button secondary" id="cancel-product" type="button">Cancel</button></div>
+    </form>
+  </dialog>
+
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
