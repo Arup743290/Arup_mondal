@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accessible Forms | Accessibility Audit</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">A11y Audit</a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html">Dashboard</a></li>
+          <li><a href="data.html">Audit data</a></li>
+          <li><a href="forms.html" aria-current="page">Forms</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content" class="container" tabindex="-1">
+    <section aria-labelledby="title">
+      <h1 id="title">Accessible form controls</h1>
+      <p id="form-help">All controls have visible labels, useful descriptions, validation attributes, and logical keyboard order.</p>
+      <form action="#" method="post" aria-describedby="form-help">
+        <fieldset>
+          <legend>Contact details</legend>
+          <div class="form-group">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required aria-required="true">
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email" required aria-required="true" aria-describedby="email-help">
+            <small id="email-help">Use an address where we can send audit follow-up.</small>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Audit preference</legend>
+          <div class="form-group">
+            <label for="priority">Priority</label>
+            <select id="priority" name="priority" required>
+              <option value="">Select a priority</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <span id="updates-label">Receive updates</span>
+            <label><input type="radio" name="updates" value="yes" required aria-labelledby="updates-label"> Yes</label>
+            <label><input type="radio" name="updates" value="no" aria-labelledby="updates-label"> No</label>
+          </div>
+          <div class="form-group">
+            <label for="notes">Additional notes</label>
+            <textarea id="notes" name="notes" rows="5" maxlength="500" aria-label="Additional audit notes"></textarea>
+          </div>
+        </fieldset>
+        <button class="button" type="submit">Submit audit request</button>
+      </form>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container"><p>Accessibility + Architecture Audit Project.</p></div></footer>
+</body>
+</html>
