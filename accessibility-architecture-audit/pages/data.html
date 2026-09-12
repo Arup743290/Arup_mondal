@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Audit Data | Accessibility Audit</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">A11y Audit</a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html">Dashboard</a></li>
+          <li><a href="data.html" aria-current="page">Audit data</a></li>
+          <li><a href="forms.html">Forms</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content" class="container" tabindex="-1">
+    <section aria-labelledby="title">
+      <h1 id="title">Audit data</h1>
+      <p>Structured findings with row and column headers for screen-reader users.</p>
+      <div class="table-wrapper">
+        <table>
+          <caption>Detailed accessibility findings</caption>
+          <thead><tr><th scope="col">ID</th><th scope="col">Component</th><th scope="col">Issue</th><th scope="col">Priority</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">A-001</th><td>Navigation</td><td>Focus indicator needs review</td><td>Medium</td></tr>
+            <tr><th scope="row">A-002</th><td>Form</td><td>Instructions should be associated with fields</td><td>Medium</td></tr>
+            <tr><th scope="row">A-003</th><td>Data table</td><td>Caption added</td><td>Low</td></tr>
+            <tr><th scope="row">A-004</th><td>Dialog</td><td>Accessible name and description added</td><td>Low</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container"><p>Accessibility + Architecture Audit Project.</p></div></footer>
+</body>
+</html>
