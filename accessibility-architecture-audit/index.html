@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Accessible multi-page audit dashboard demonstrating semantic HTML5, keyboard navigation, forms, tables, and dialogs.">
+  <title>Accessibility Audit Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Accessibility Audit Dashboard home">A11y Audit</a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" aria-current="page">Dashboard</a></li>
+          <li><a href="pages/data.html">Audit data</a></li>
+          <li><a href="pages/forms.html">Forms</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="layout container">
+    <aside class="sidebar" aria-label="Sidebar navigation">
+      <h2>Sections</h2>
+      <nav aria-label="Dashboard sections">
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#findings">Findings</a></li>
+          <li><a href="#actions">Actions</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+      <section id="overview" aria-labelledby="overview-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Accessible interface example</p>
+            <h1 id="overview-title">Accessibility Audit Dashboard</h1>
+            <p>Semantic structure, visible focus, keyboard-friendly controls, and clear data presentation.</p>
+          </div>
+          <button class="button" type="button" data-open-dialog="audit-dialog">View audit details</button>
+        </div>
+
+        <div class="cards" aria-label="Audit summary">
+          <article class="card">
+            <h2>Accessibility score</h2>
+            <p class="metric">96%</p>
+            <p>Strong baseline with a few items to review.</p>
+          </article>
+          <article class="card">
+            <h2>Findings</h2>
+            <p class="metric">4</p>
+            <p>Two medium and two low-priority findings.</p>
+          </article>
+          <article class="card">
+            <h2>Last audit</h2>
+            <p class="metric">12 Sep 2026</p>
+            <p>Keyboard and markup checks documented.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="findings" aria-labelledby="findings-title">
+        <h2 id="findings-title">Recent findings</h2>
+        <div class="table-wrapper">
+          <table>
+            <caption>Accessibility findings and remediation priority</caption>
+            <thead>
+              <tr>
+                <th scope="col">Finding</th>
+                <th scope="col">Area</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Focus visibility</th><td>Navigation</td><td>Medium</td><td>Review</td></tr>
+              <tr><th scope="row">Form instructions</th><td>Forms</td><td>Medium</td><td>Open</td></tr>
+              <tr><th scope="row">Table caption</th><td>Data</td><td>Low</td><td>Resolved</td></tr>
+              <tr><th scope="row">Dialog labeling</th><td>Components</td><td>Low</td><td>Resolved</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="actions" aria-labelledby="actions-title">
+        <h2 id="actions-title">Next actions</h2>
+        <article class="panel">
+          <h3>Complete the manual keyboard pass</h3>
+          <p>Use Tab and Shift+Tab to verify focus order, visible focus, activation, and the absence of keyboard traps.</p>
+          <a class="button secondary" href="pages/forms.html">Open accessible form example</a>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Accessibility + Architecture Audit Project · Built with semantic HTML5.</p>
+    </div>
+  </footer>
+
+  <dialog id="audit-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <div class="dialog-content">
+      <h2 id="dialog-title">Audit details</h2>
+      <p id="dialog-description">This example demonstrates a native modal dialog with an accessible name, description, and keyboard-operable controls.</p>
+      <ul>
+        <li>Semantic landmarks are used throughout the page.</li>
+        <li>Interactive elements are reachable with the keyboard.</li>
+        <li>Form and table examples are available on separate pages.</li>
+      </ul>
+      <button class="button" type="button" data-close-dialog>Close dialog</button>
+    </div>
+  </dialog>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
