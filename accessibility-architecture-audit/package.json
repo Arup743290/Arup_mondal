@@ -1,0 +1,8 @@
+{
+  "name": "accessibility-architecture-audit",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "audit:lighthouse": "bash scripts/lighthouse.sh"
+  }
+}

@@ -1,0 +1,6 @@
+issue_id,page_or_component,wcag_reference,evidence,severity,user_impact,recommended_fix,owner,status
+WEB-001,Google homepage form,1.3.1 / 3.3.2,Automated evidence: missing form input label,High,Can make the control difficult to identify for assistive technology users,Provide a programmatic accessible name using a label or equivalent,Student,Open
+WEB-002,Google homepage document,3.1.1,Automated evidence: missing document language,Medium,Can reduce correct language interpretation by assistive technology,Set the document language on the root html element,Student,Open
+WEB-003,Google homepage link,2.4.4,Automated evidence: empty link,High,Users may not understand the destination or purpose,Provide an accessible link name or remove the decorative interactive element,Student,Open
+WEB-004,Google homepage text,1.4.3,Automated evidence: very-low-contrast instances,High,Low-vision users may struggle to read text,Adjust foreground/background contrast and re-test,Student,Open
+WEB-005,Google homepage keyboard navigation,2.1.1 / 2.4.3,TO VERIFY: complete manual Tab/Shift+Tab pass,To verify,Potential difficulty navigating without a mouse,Test focus visibility order activation and keyboard traps,Student,Open

@@ -1,3 +1,3 @@
 # Client
 
-Place browser UI and the accessibility audit dashboard here.
+Place the browser UI and Accessibility Audit Dashboard here.
